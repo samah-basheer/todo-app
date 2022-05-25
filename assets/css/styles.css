@@ -99,3 +99,13 @@ li {
 .task-menu li {
     margin-left: 8px;
 }
+.task {
+    list-style: none;
+    font-size: 17px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    align-items: flex-start;
+}
+li.task:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+}
