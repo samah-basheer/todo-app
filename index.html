@@ -5,6 +5,7 @@
     <title>ToDo App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>
 <body>
     <div class="card">
@@ -28,6 +29,21 @@
                     </div>
                     <button class="clear-btn active">Sort</button>
                 </div>
+                <ul class="task-box">
+                    <li class="task">
+                        <label>
+                            <input onclick="updateStatus(this)" type="checkbox">
+                            <p class="">Test</p>
+                        </label>
+                        <div class="settings">
+                            <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
+                            <ul class="task-menu">
+                                <li onclick=""><i class="uil uil-pen"></i>Edit</li>
+                                <li onclick=""><i class="uil uil-trash"></i>Delete</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
