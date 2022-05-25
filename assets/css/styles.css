@@ -92,3 +92,10 @@ li {
     margin-left: 12px;
     word-wrap: break-word;
 }
+.task-menu {
+    display: flex;
+    justify-content: space-between;
+}
+.task-menu li {
+    margin-left: 8px;
+}
