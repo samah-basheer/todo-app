@@ -11,10 +11,14 @@ body {
     max-width: 500px;
     margin: 137px auto;
 }
+.todo-header, .todo-body {
+    padding-left: 5%;
+    padding-right: 5%;
+}
 .todo-card {
     margin-left: 5%;
     margin-right: 5%;
-    padding: 28px 5% 30px;
+    padding: 28px 0 30px;
     background: #fff;
     border-radius: 7px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -50,4 +54,8 @@ button {
     pointer-events: none;
     transition: transform 0.25s ease;
     background: linear-gradient(135deg, #1798fb 0%, #2D5CFE 100%);
+}
+.todo-header {
+    padding-bottom: 5%;
+    border-bottom: 1px solid #ccc;
 }
