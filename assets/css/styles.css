@@ -107,3 +107,9 @@ li {
 li.task:not(:last-child) {
     border-bottom: 1px solid #ccc;
 }
+.filters, .task-menu li {
+    cursor: pointer;
+}
+.filters span.active{
+    color: #3C87FF;
+}
