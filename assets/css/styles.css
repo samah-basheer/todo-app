@@ -123,3 +123,6 @@ p {
     overflow-y: auto;
     max-height: 300px;
 }
+.task.checked {
+    color: #ccc;
+}

@@ -46,7 +46,7 @@ function showTodo(filter) {
         todos.forEach((todo, id) => {
             let completed = todo.IsDone === true ? "checked" : "";
             if(String(filter) === String(todo.IsDone) || filter == "all") {
-                liTag += `<li class="task">
+                liTag += `<li class="task ${completed}">
                             <label for="${id}">
                                 <input onclick="updateStatus(this)" type="checkbox" id="${id}" ${completed}>
                                 <div>
@@ -81,7 +81,7 @@ filters.forEach(btn => {
 
 //update task status
 function updateStatus(selectedTask) {
-    let taskName = selectedTask.parentElement.lastElementChild;
+    let taskName = selectedTask.parentElement.parentElement;
     if(selectedTask.checked) {
         taskName.classList.add("checked");
         todos[selectedTask.id].IsDone = true;
