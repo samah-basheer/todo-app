@@ -92,3 +92,9 @@ function updateStatus(selectedTask) {
     localStorage.setItem("todo-list", JSON.stringify(todos))
 }
 
+//delete task
+function deleteTask(deleteId, filter) {
+    todos.splice(deleteId, 1);
+    localStorage.setItem("todo-list", JSON.stringify(todos));
+    showTodo(filter);
+}
