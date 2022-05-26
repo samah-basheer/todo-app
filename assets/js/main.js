@@ -3,6 +3,10 @@ var task_id = 0;
 let todos = JSON.parse(localStorage.getItem("todo-list"));
 const taskBox = document.querySelector(".task-box");
 const filters = document.querySelectorAll(".filters span");
+const taskTitleInput = document.querySelector("#title");
+const taskDescriptionInput = document.querySelector("#description");
+const taskPointInput = document.querySelector("#point");
+let isEditTask = false;
 
 // check if input is empty or not
 function validateInput(input){
@@ -19,20 +23,31 @@ function generateTaskId() {
 
 //handle on click add new task button
 $("#add_task").on( 'click', function () {
-
     task_title =  $("#title").val();
     task_description = $("#description").val();
     today = new Date();
     task_point = $("#point").val();
     task_createdAt = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+ (today.getHours() % 12 || 12) + ":" + today.getMinutes() + ":" + today.getSeconds();
     task_id = generateTaskId();
-
-    if(validateInput(task_title)){
-        todos = !todos ? [] : todos;
-        let taskInfo = {id: task_id, title: task_title, description: task_description, point: task_point, IsDone: false, CreatedAt: task_createdAt };
-        todos.push(taskInfo);
+    if(!isEditTask) {
+        if(validateInput(task_title)){
+            todos = !todos ? [] : todos;
+            let taskInfo = {id: task_id, title: task_title, description: task_description, point: task_point, IsDone: false, CreatedAt: task_createdAt };
+            todos.push(taskInfo);
+            $("#title").val("");
+            $("#description").val("");
+            $("#point").val("");
+        } else {
+            alert("Title is required");
+        }
     } else {
-        alert("Title is required");
+        isEditTask = false;
+        todos[editId].title = task_title;
+        todos[editId].description = task_description;
+        todos[editId].point = task_point;
+        $("#title").val("");
+        $("#description").val("");
+        $("#point").val("");
     }
     localStorage.setItem("todo-list", JSON.stringify(todos));
     showTodo("all");
@@ -56,7 +71,7 @@ function showTodo(filter) {
                             </label>
                             <div class="settings">
                                 <ul class="task-menu">
-                                    <li class="edit" onclick='editTask(${id}, "${todo.name}")'><i class="uil uil-pen"></i>Edit</li>
+                                    <li class="edit" onclick='editTask(${id}, "${todo.title}", "${todo.description}", "${todo.point}")'><i class="uil uil-pen"></i>Edit</li>
                                     <li class="trash" onclick='deleteTask(${id}, "${filter}")'><i class="uil uil-trash"></i>Delete</li>
                                 </ul>
                             </div>
@@ -94,7 +109,18 @@ function updateStatus(selectedTask) {
 
 //delete task
 function deleteTask(deleteId, filter) {
+    isEditTask = false;
     todos.splice(deleteId, 1);
     localStorage.setItem("todo-list", JSON.stringify(todos));
     showTodo(filter);
+}
+
+function editTask(taskId, title, description, point) {
+    isEditTask = true;
+    editId = taskId;
+    taskTitleInput.value = title;
+    taskDescriptionInput.value = description;
+    taskPointInput.value = point;
+    taskTitleInput.focus();
+    taskTitleInput.classList.add("active");
 }
