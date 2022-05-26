@@ -48,7 +48,7 @@ function showTodo(filter) {
             if(String(filter) === String(todo.IsDone) || filter == "all") {
                 liTag += `<li class="task">
                             <label for="${id}">
-                                <input onclick="updateStatus(this)" type="checkbox" ${completed}>
+                                <input onclick="updateStatus(this)" type="checkbox" id="${id}" ${completed}>
                                 <div>
                                     <h3>${todo.title}</h3>
                                     <p>${todo.description}</p>
@@ -79,5 +79,16 @@ filters.forEach(btn => {
     });
 });
 
-console.log(todos);
+//update task status
+function updateStatus(selectedTask) {
+    let taskName = selectedTask.parentElement.lastElementChild;
+    if(selectedTask.checked) {
+        taskName.classList.add("checked");
+        todos[selectedTask.id].IsDone = true;
+    } else {
+        taskName.classList.remove("checked");
+        todos[selectedTask.id].IsDone = false;
+    }
+    localStorage.setItem("todo-list", JSON.stringify(todos))
+}
 
