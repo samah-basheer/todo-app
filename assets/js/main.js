@@ -1,6 +1,7 @@
 let task_title, task_description, task_createdAt, today, task_point;
 var task_id = 0;
 let todos = JSON.parse(localStorage.getItem("todo-list"));
+const taskBox = document.querySelector(".task-box");
 
 // check if input is empty or not
 function validateInput(input){
@@ -18,7 +19,6 @@ function generateTaskId() {
 //handle on click add new task button
 $("#add_task").on( 'click', function () {
 
-
     task_title =  $("#title").val();
     task_description = $("#description").val();
     today = new Date();
@@ -34,5 +34,40 @@ $("#add_task").on( 'click', function () {
         alert("Title is required");
     }
     localStorage.setItem("todo-list", JSON.stringify(todos));
+    showTodo("all");
 });
+
+
+//filter tasks
+function showTodo(filter) {
+    let liTag = "";
+    if(todos) {
+        todos.forEach((todo, id) => {
+            let completed = todo.IsDone == true ? "checked" : "";
+            if(filter == todo.IsDone || filter == "all") {
+                liTag += `<li class="task">
+                            <label for="${id}">
+                                <input onclick="updateStatus(this)" type="checkbox" ${completed}>
+                                <div>
+                                    <h3>${todo.title}</h3>
+                                    <p>${todo.description}</p>
+                                </div>
+                            </label>
+                            <div class="settings">
+                                <ul class="task-menu">
+                                    <li onclick='editTask(${id}, "${todo.name}")'><i class="uil uil-pen"></i>Edit</li>
+                                    <li onclick='deleteTask(${id}, "${filter}")'><i class="uil uil-trash"></i>Delete</li>
+                                </ul>
+                            </div>
+                        </li>`;
+            }
+        });
+    }
+    taskBox.innerHTML = liTag || `<span>You don't have any task here</span>`;
+    let checkTask = taskBox.querySelectorAll(".task");
+    taskBox.offsetHeight >= 300 ? taskBox.classList.add("overflow") : taskBox.classList.remove("overflow");
+}
+showTodo("all");
+
 console.log(todos);
+

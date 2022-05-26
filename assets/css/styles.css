@@ -113,3 +113,13 @@ li.task:not(:last-child) {
 .filters span.active{
     color: #3C87FF;
 }
+p {
+    margin: 0!important;
+}
+.task input[type=checkbox] {
+    margin-right: 12px;
+}
+.task-box.overflow{
+    overflow-y: auto;
+    max-height: 300px;
+}
