@@ -2,6 +2,7 @@ let task_title, task_description, task_createdAt, today, task_point;
 var task_id = 0;
 let todos = JSON.parse(localStorage.getItem("todo-list"));
 const taskBox = document.querySelector(".task-box");
+const filters = document.querySelectorAll(".filters span");
 
 // check if input is empty or not
 function validateInput(input){
@@ -44,7 +45,7 @@ function showTodo(filter) {
     if(todos) {
         todos.forEach((todo, id) => {
             let completed = todo.IsDone == true ? "checked" : "";
-            if(filter == todo.IsDone || filter == "all") {
+            if(String(filter) === String(todo.IsDone) || filter == "all") {
                 liTag += `<li class="task">
                             <label for="${id}">
                                 <input onclick="updateStatus(this)" type="checkbox" ${completed}>
@@ -68,6 +69,15 @@ function showTodo(filter) {
     taskBox.offsetHeight >= 300 ? taskBox.classList.add("overflow") : taskBox.classList.remove("overflow");
 }
 showTodo("all");
+
+//handle on click filter buttons (pending / completed)
+filters.forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelector("span.active").classList.remove("active");
+        btn.classList.add("active");
+        showTodo(btn.id);
+    });
+});
 
 console.log(todos);
 
