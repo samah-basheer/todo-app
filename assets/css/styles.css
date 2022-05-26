@@ -135,3 +135,6 @@ p {
 .task.checked .uil-pen,.task.checked .edit,.task.checked .uil-trash,.task.checked .trash {
     pointer-events: none;
 }
+.task {
+    transition: all .2s linear;
+}

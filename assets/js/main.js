@@ -115,6 +115,7 @@ function deleteTask(deleteId, filter) {
     showTodo(filter);
 }
 
+//edit task
 function editTask(taskId, title, description, point) {
     isEditTask = true;
     editId = taskId;
@@ -124,3 +125,34 @@ function editTask(taskId, title, description, point) {
     taskTitleInput.focus();
     taskTitleInput.classList.add("active");
 }
+
+//search tasks
+$("#search_task").on( 'click', function () {
+    task_title =  $("#title").val();
+    task_description = $("#description").val();
+    let liTag = "";
+
+    if(todos) {
+        todos.forEach((todo, id) => {
+            let completed = todo.IsDone === true ? "checked" : "";
+            if(task_title === todo.title || task_description === todo.description ) {
+                liTag += `<li class="task ${completed}">
+                            <label for="${id}">
+                                <input onclick="updateStatus(this)" type="checkbox" id="${id}" ${completed}>
+                                <div>
+                                    <h3>${todo.title}</h3>
+                                    <p>${todo.description}</p>
+                                </div>
+                            </label>
+                            <div class="settings">
+                                <ul class="task-menu">
+                                    <li class="edit" onclick='editTask(${id}, "${todo.title}", "${todo.description}", "${todo.point}")'><i class="uil uil-pen"></i>Edit</li>
+                                    <li class="trash" onclick='deleteTask(${id}, "all")'><i class="uil uil-trash"></i>Delete</li>
+                                </ul>
+                            </div>
+                        </li>`;
+            }
+            taskBox.innerHTML = liTag || `<span>You don't have any task here</span>`;
+        });
+    }
+});
