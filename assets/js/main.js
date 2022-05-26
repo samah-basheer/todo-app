@@ -10,10 +10,12 @@ function validateInput(input){
     return false;
 }
 
+// generate a random number
 function generateTaskId() {
     return Math.floor(Math.random() * 1000);
 }
 
+//handle on click add new task button
 $("#add_task").on( 'click', function () {
 
 
