@@ -44,7 +44,7 @@ function showTodo(filter) {
     let liTag = "";
     if(todos) {
         todos.forEach((todo, id) => {
-            let completed = todo.IsDone == true ? "checked" : "";
+            let completed = todo.IsDone === true ? "checked" : "";
             if(String(filter) === String(todo.IsDone) || filter == "all") {
                 liTag += `<li class="task">
                             <label for="${id}">
