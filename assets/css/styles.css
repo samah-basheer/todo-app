@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body {
-    background: linear-gradient(135deg, #4AB1FF, #2D5CFE);;
+    background: linear-gradient(135deg, #f7cad0, #fae0e4);
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
     font-size: 17px;
@@ -53,7 +53,7 @@ button {
     border-radius: 4px;
     letter-spacing: 0.3px;
     transition: transform 0.25s ease;
-    background: linear-gradient(135deg, #1798fb 0%, #2D5CFE 100%);
+    background: linear-gradient(135deg,  #ff85a1 0%, #ff99ac 100%);
 }
 .todo-header {
     padding-bottom: 3%;
@@ -111,7 +111,7 @@ li.task:not(:last-child) {
     cursor: pointer;
 }
 .filters span.active{
-    color: #3C87FF;
+    color: #ff85a1;
 }
 p {
     margin: 0!important;
@@ -123,6 +123,15 @@ p {
     overflow-y: auto;
     max-height: 300px;
 }
-.task.checked {
+.uil-trash, .trash {
+    color: red;
+}
+.uil-pen, .edit {
+    color: #1d3557;
+}
+.task.checked, .task.checked .uil-pen,.task.checked .edit,.task.checked .uil-trash,.task.checked .trash  {
     color: #ccc;
+}
+.task.checked .uil-pen,.task.checked .edit,.task.checked .uil-trash,.task.checked .trash {
+    pointer-events: none;
 }
