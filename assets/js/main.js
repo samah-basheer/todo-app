@@ -29,7 +29,7 @@ $("#add_task").on( 'click', function () {
         let taskInfo = {id: task_id, title: task_title, description: task_description, point: task_point, IsDone: false, CreatedAt: task_createdAt };
         todos.push(taskInfo);
     } else {
-        alert("Title , Points & description are required");
+        alert("Title is required");
     }
     localStorage.setItem("todo-list", JSON.stringify(todos));
 });
