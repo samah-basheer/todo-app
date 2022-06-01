@@ -159,3 +159,49 @@ $("#search_task").on( 'click', function () {
         });
     }
 });
+
+// sort tasks by points
+$("#sort_task").on( 'click', function () {
+    let todos_sort = todos.sort((a, b) => {
+        if (a.point > b.point) {
+            return -1;
+        }
+        if (a.point < b.point) {
+            return 1;
+        }
+        return 0;
+    });
+
+    function showTodo(filter) {
+        let liTag = "";
+        if(todos_sort) {
+            todos_sort.forEach((todo, id) => {
+                let completed = todo.IsDone === true ? "checked" : "";
+                if(String(filter) === String(todo.IsDone) || filter == "all") {
+                    liTag += `<li class="task ${completed}">
+                            <label for="${id}">
+                                <input onclick="updateStatus(this)" type="checkbox" id="${id}" ${completed}>
+                                <div>
+                                    <div class="flex">
+                                        <h3>${todo.title}</h3>
+                                        <p class="points">${todo.point}</p>
+                                    </div>
+                                    <p>${todo.description}</p>
+                                </div>
+                            </label>
+                            <div class="settings">
+                                <ul class="task-menu">
+                                    <li class="edit" onclick='editTask(${id}, "${todo.title}", "${todo.description}", "${todo.point}")'><i class="uil uil-pen"></i>Edit</li>
+                                    <li class="trash" onclick='deleteTask(${id}, "${filter}")'><i class="uil uil-trash"></i>Delete</li>
+                                </ul>
+                            </div>
+                        </li>`;
+                }
+            });
+        }
+        taskBox.innerHTML = liTag || `<span>You don't have any task here</span>`;
+        let checkTask = taskBox.querySelectorAll(".task");
+        taskBox.offsetHeight >= 300 ? taskBox.classList.add("overflow") : taskBox.classList.remove("overflow");
+    }
+    showTodo("all");
+});
