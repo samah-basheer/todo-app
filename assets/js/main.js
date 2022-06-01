@@ -65,7 +65,10 @@ function showTodo(filter) {
                             <label for="${id}">
                                 <input onclick="updateStatus(this)" type="checkbox" id="${id}" ${completed}>
                                 <div>
-                                    <h3>${todo.title}</h3>
+                                    <div class="flex">
+                                        <h3>${todo.title}</h3>
+                                        <p class="points">${todo.point}</p>
+                                    </div>
                                     <p>${todo.description}</p>
                                 </div>
                             </label>

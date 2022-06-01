@@ -138,3 +138,18 @@ p {
 .task {
     transition: all .2s linear;
 }
+.flex {
+    display: flex;
+}
+.points {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #ff85a1 0%, #ff99ac 100%);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-left: 9px!important;
+    font-size: 13px;
+}
